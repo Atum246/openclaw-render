@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: openclaw-24-7
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      # Required
+      - key: OPENCLAW_LLM_API_KEY
+        sync: false
+      - key: GITHUB_GIST_TOKEN
+        sync: false
+
+      # Optional
+      - key: OPENCLAW_LLM_MODEL
+        value: openrouter/google/gemma-4-31b-it:free
+      - key: UPTIMEROBOT_API_KEY
+        sync: false
+
+    healthCheckPath: /health
