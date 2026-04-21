@@ -37,14 +37,13 @@ RUN chmod +x /app/start.sh /app/backup.py
 # Environment defaults
 ENV NODE_ENV=production
 ENV PORT=10000
-ENV GATEWAY_PORT=7860
 
-# Expose port
+# Expose port (Render uses PORT env var)
 EXPOSE 10000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-  CMD curl -f http://localhost:${GATEWAY_PORT}/health || exit 1
+  CMD curl -f http://localhost:${PORT}/health || exit 1
 
 # Startup command
 CMD ["/bin/bash", "/app/start.sh"]
